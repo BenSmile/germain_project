@@ -20,18 +20,17 @@ export default class Questionnaire extends Component {
                 {
                     question: "Question 2",
                     type: "radio",
-                    suggestion: ""
+                    suggestion: "Male\nFemale"
                 }, {
                     question: "Question 3",
                     type: "checkbox",
-                    suggestion: ""
-                }, {
-                    question: "Question 4",
-                    type: "selectmany",
-                    suggestion: ""
+                    suggestion: "Ben\nKaf"
                 }
             ]
         }
+
+       
+
 
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -95,8 +94,8 @@ export default class Questionnaire extends Component {
 
 
                             {
-                                this.state.questions.map(question =>
-                                    <Question question = {question}/>
+                                this.state.questions.map((question, index) =>
+                                    <Question question = {question} index={index}/>
                             
                                 )
                             }

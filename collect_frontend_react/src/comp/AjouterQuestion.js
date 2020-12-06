@@ -24,7 +24,7 @@ export default class AjouterQuestion extends Component {
             question: "",
             type: "",
             suggestion: "",
-            dismiss_modal: ""
+            dismiss_modal: false
         })
 
     }
@@ -60,7 +60,7 @@ export default class AjouterQuestion extends Component {
         console.log("data = ", newQuestion)
         this.props.addQuestion(newQuestion);
         this.resetData();
-        this.setState({ dismiss_modal: "modal" })
+        this.setState({ dismiss_modal: false })
     }
 
 
@@ -68,7 +68,7 @@ export default class AjouterQuestion extends Component {
         return (
 
 
-            <div className="modal fade" id="modal-default">
+            <div className="modal show fade" id="modal-default">
                 <div className="modal-dialog">
                     <div className="modal-content">
                         <div className="modal-header">
@@ -82,22 +82,22 @@ export default class AjouterQuestion extends Component {
 
                                 <div className="form-group">
                                     <label>Question</label>
-                                    <textarea required="true" rows="3" value={this.state.question} onChange={this.onChange} type="text" className="form-control " name="question" placeholder="Entrez la question" />
+                                    <textarea  rows="3" value={this.state.question} onChange={this.onChange} type="text" className="form-control " name="question" placeholder="Entrez la question" />
                                 </div>
 
                                 <div className="form-group">
                                     <label>Type de reponse</label>
-                                    <select required="true" value={this.state.type} onChange={this.onChange} className="form-control" name="type">
+                                    <select  value={this.state.type} onChange={this.onChange} className="form-control" name="type">
                                         <option value="">Select type</option>
                                         <option value="text">text</option>
-                                        <option value="select_one">select_one</option>
-                                        <option value="select_multiple">select_multiple</option>
+                                        <option value="checkbox">checkbox</option>
+                                        {/* <option value="select_multiple">select_multiple</option> */}
                                         <option value="radio">radio</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
                                     <label htmlFor="exampleInputEmail1">Nom</label>
-                                    <textarea required="true" rows="4" value={this.state.suggestion} onChange={this.onChange} type="text" className="form-control " name="suggestion"
+                                    <textarea  rows="4" value={this.state.suggestion} onChange={this.onChange} type="text" className="form-control " name="suggestion"
                                         placeholder={`Suggestion 1 ${'\n'}Suggestion 2 ${'\n'}Suggestion 3 ${'\n'}Suggestion 4 ${'\n'}`} />
                                 </div>
                                 <div className="modal-footer justify-content-between">
