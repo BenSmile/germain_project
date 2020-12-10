@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { useLocation } from 'react-router-dom';
 
 export default class Login extends Component {
 
@@ -25,12 +26,17 @@ export default class Login extends Component {
         e.preventDefault();
 
         this.props.history.push("/home")
-       
+
         console.log("object = ", this.state.username);
     }
 
 
     render() {
+
+        const { pathname } = this.props.location;
+
+        console.log('pathname = ', pathname);
+
         return ReactDOM.createPortal(<div className="login-box">
             <div className="login-logo">
                 <a href="../../index2.html"><b>Admin</b>LTE</a>
