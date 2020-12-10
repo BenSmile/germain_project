@@ -57,14 +57,6 @@ public class Questionnaire {
         this.description = description;
     }
 
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
-
     @JsonIgnore
     public List<Question> getQuestions() {
         return questions;
