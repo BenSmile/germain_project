@@ -7,4 +7,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface QuestionnaireRepository extends CrudRepository<Questionnaire, Long> {
 
+    @Override
+    Iterable<Questionnaire> findAllById(Iterable<Long> iterable);
+
+    Questionnaire findQuestionnaireById(Long id);
+
+    Questionnaire findQuestionnaireByCode(String code);
 }

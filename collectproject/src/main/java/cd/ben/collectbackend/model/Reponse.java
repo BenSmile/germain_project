@@ -2,6 +2,7 @@ package cd.ben.collectbackend.model;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "reponse")
@@ -10,8 +11,11 @@ public class Reponse {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
+    @NotBlank(message = "Index is required")
     private String enquete;
+    @NotBlank(message = "Value is required")
     private String valeur;
+    @NotBlank(message = "Questionnaire is required")
     @ManyToOne
     @JoinColumn(name="questionnaireId", nullable = false)
     private Question question;

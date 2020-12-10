@@ -1,6 +1,7 @@
 package cd.ben.collectbackend.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.List;
 
@@ -12,7 +13,9 @@ public class Question {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+    @NotBlank(message = "Title is required")
     private String titre;
+    @NotBlank(message = "Type is required")
     private String type;
     private String suggestions;
     @ManyToOne
