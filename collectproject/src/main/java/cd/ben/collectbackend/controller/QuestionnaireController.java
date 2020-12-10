@@ -2,6 +2,7 @@ package cd.ben.collectbackend.controller;
 
 
 import cd.ben.collectbackend.Repository.QuestionnaireRepository;
+import cd.ben.collectbackend.Service.QuestionService;
 import cd.ben.collectbackend.Service.QuestionnaireService;
 import cd.ben.collectbackend.model.Question;
 import cd.ben.collectbackend.model.Questionnaire;
@@ -20,23 +21,27 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/questionnaire")
 @CrossOrigin
 public class QuestionnaireController {
 
     @Autowired
     private QuestionnaireService questionnaireService;
 
+
+//    @Autowired
+//    private QuestionService questionService;
+
     //    this method work for update and create task
     @PostMapping("/")
     public ResponseEntity<?> addQuestionnaire(@Valid @RequestBody Questionnaire questionnaire, BindingResult result) {
 
-        if (result.hasErrors()){
+        if (result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
             for (FieldError error : result.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
-            return new ResponseEntity<Map<String,String>>(errorMap, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
         }
         Questionnaire newQuestionnaire = questionnaireService.saveOrUpdate(questionnaire);
         return new ResponseEntity(newQuestionnaire, HttpStatus.CREATED);
@@ -49,7 +54,7 @@ public class QuestionnaireController {
 
     @GetMapping("/{id}")
     public ResponseEntity getQuestionnaireById(@PathVariable Long id) {
-        if(questionnaireService.findById(id) ==  null){
+        if (questionnaireService.findById(id) == null) {
             return new ResponseEntity<String>("Questionnaire not found", HttpStatus.BAD_REQUEST);
         }
         Questionnaire byId = questionnaireService.findById(id);
@@ -58,7 +63,7 @@ public class QuestionnaireController {
 
     @GetMapping("/code/{code}")
     public ResponseEntity getQuestionnaireByCode(@PathVariable String code) {
-        if(questionnaireService.findByCode(code) ==  null){
+        if (questionnaireService.findByCode(code) == null) {
             return new ResponseEntity<String>("Questionnaire not found", HttpStatus.BAD_REQUEST);
         }
         Questionnaire byId = questionnaireService.findByCode(code);
@@ -68,11 +73,23 @@ public class QuestionnaireController {
     @DeleteMapping("/{id}")
     public ResponseEntity deletePT(@PathVariable Long id) {
 
-        if(questionnaireService.findById(id) ==  null){
+        if (questionnaireService.findById(id) == null) {
             return new ResponseEntity<String>("Questionnaire not found", HttpStatus.BAD_REQUEST);
         }
         questionnaireService.deleteById(id);
         return new ResponseEntity<String>("Questionnaire deleted", HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/questions/")
+    public ResponseEntity getQuestions(@PathVariable Long id) {
+        if (questionnaireService.findById(id) == null) {
+            return new ResponseEntity<String>("Questionnaire not found", HttpStatus.BAD_REQUEST);
+        }
+        Questionnaire byId = questionnaireService.findById(id);
+        Iterable<Question> questions= questionnaireService.findAllQuestions(byId);
+
+//        List<Question> questions = byId.getQuestions();
+        return new ResponseEntity(questions, HttpStatus.OK);
     }
 
 }

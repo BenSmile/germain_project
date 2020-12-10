@@ -2,10 +2,12 @@ package cd.ben.collectbackend.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,14 +21,17 @@ public class Questionnaire {
     @NotBlank(message = "Title is required")
     private String titre;
     @NotBlank(message = "Code is required")
+    @Column(unique = true)
     private String code;
     @NotBlank(message = "Description is required")
     private String description;
     @NotNull(message = "Date is required")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
-    @OneToMany
-    private List<Question> questions;
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionnaire")
+    private List<Question> questions = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -60,6 +65,7 @@ public class Questionnaire {
 //        this.date = date;
 //    }
 
+    @JsonIgnore
     public List<Question> getQuestions() {
         return questions;
     }

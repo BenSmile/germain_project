@@ -2,6 +2,7 @@ package cd.ben.collectbackend.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.List;
 
@@ -18,15 +19,21 @@ public class Question {
     @NotBlank(message = "Type is required")
     private String type;
     private String suggestions;
-    @ManyToOne
+    @NotNull(message = "Questionnaire is required")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
     @JoinColumn(name="questionnaireId", nullable = false, updatable = false)
     private Questionnaire questionnaire;
 
-    public long getId() {
+//    @NotBlank(message = "Type is required")
+//    @Enumerated(EnumType.STRING)
+//    private TypedQuery type;
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

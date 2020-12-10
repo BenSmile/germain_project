@@ -1,7 +1,9 @@
 package cd.ben.collectbackend.Service;
 
 
+import cd.ben.collectbackend.Repository.QuestionRepository;
 import cd.ben.collectbackend.Repository.QuestionnaireRepository;
+import cd.ben.collectbackend.model.Question;
 import cd.ben.collectbackend.model.Questionnaire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,9 @@ public class QuestionnaireService {
 
     @Autowired
     private QuestionnaireRepository questionnaireRepository;
+
+    @Autowired
+    private QuestionRepository questionRepository;
 
     public Questionnaire saveOrUpdate(Questionnaire questionnaire) {
 
@@ -39,6 +44,10 @@ public class QuestionnaireService {
         if (findById(id) != null) {
             questionnaireRepository.delete(findById(id));
         }
+    }
+
+    public Iterable<Question> findAllQuestions(Questionnaire questionnaire) {
+        return questionRepository.findQuestionsByQuestionnaire(questionnaire);
     }
 
 
