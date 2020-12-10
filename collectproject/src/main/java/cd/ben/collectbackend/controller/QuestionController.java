@@ -4,6 +4,8 @@ import cd.ben.collectbackend.Repository.QuestionRepository;
 import cd.ben.collectbackend.Service.QuestionService;
 import cd.ben.collectbackend.Service.QuestionnaireService;
 import cd.ben.collectbackend.model.Question;
+import cd.ben.collectbackend.model.Questionnaire;
+import cd.ben.collectbackend.model.Reponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -101,5 +103,15 @@ public class QuestionController {
         question.setQuestionnaire(questionnaireService.findById(payload.get("questionnaire").asLong()));
         Question newQuestionnaire = questionService.saveOrUpdate(question);
         return new ResponseEntity(null, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}/reponses/")
+    public ResponseEntity getReponses(@PathVariable Long id) {
+        if (questionService.findById(id) == null) {
+            return new ResponseEntity<String>("Question not found", HttpStatus.BAD_REQUEST);
+        }
+        Question byId = questionService.findById(id);
+        Iterable<Reponse> reponses= questionService.findAllReponseByQuestion(byId);
+        return new ResponseEntity(reponses, HttpStatus.OK);
     }
 }

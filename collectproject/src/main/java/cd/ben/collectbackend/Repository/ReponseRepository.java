@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 public interface ReponseRepository extends CrudRepository<Reponse, Long> {
 
     Reponse findReponseById(Long id);
+
+    Iterable<Reponse> findReponsesByQuestion(Question question);
 }
