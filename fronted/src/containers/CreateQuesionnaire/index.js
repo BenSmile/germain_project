@@ -1,6 +1,10 @@
 import React, {useEffect} from 'react'
 
 import {addQuestionnaire} from "../../context/actions/questionnaire"
+import Header from '../../components/Header'
+import CreateQuestionnaireUI from '../../layout/CreateQuestionnaire';
+import useForm from './useForm';
+
 
 function CreateQuestionniareComponent() {
 
@@ -9,7 +13,8 @@ function CreateQuestionniareComponent() {
     }, [])
     return (
         <div>
-            <h1>Crate questionnaire</h1>
+      
+            <CreateQuestionnaireUI form={useForm()}/>
         </div>
     )
 }

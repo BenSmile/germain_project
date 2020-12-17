@@ -60,11 +60,11 @@ function App() {
               <Route exact path="/abonnes" component={ListAbonnes}></Route>
               <Route exact path="/questionnaire" component={Questionnaire}></Route>
               {/* <Route exact path="/home" component={Home}></Route> */}
-              <Route exact path="/addAbonne" component={AddAbonne} />
-              <Route exact path="/updateAbonne/:telephone" component={AddAbonne} />
+              {/* <Route exact path="/addAbonne" component={AddAbonne} />
+              <Route exact path="/updateAbonne/:telephone" component={AddAbonne} /> */}
 
-              <Route exact path="/operations" component={ListOperations}></Route>
-              <Route exact path="/comptes" component={ListAbonnes}></Route>
+              {/* <Route exact path="/operations" component={ListOperations}></Route>
+              <Route exact path="/comptes" component={ListAbonnes}></Route> */}
               <Route exact path="/login" component={Login}></Route>
 
               <Route exact path="/addOperation" component={AddOperation} />

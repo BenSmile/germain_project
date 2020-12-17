@@ -1,4 +1,5 @@
 import { default as CreateQuestionniareComponent } from "../containers/CreateQuesionnaire";
+import HomeComponent from "../containers/Home";
 import { default as LoginComponent } from "../containers/Login";
 import { default as QuestionniareComponent } from "../containers/Questionniare";
 import { default as RegisterComponent } from "../containers/Register";
@@ -15,6 +16,12 @@ const routes = [
         component : QuestionniareComponent,
         title:"Questionnaires"
     },
+    {
+        path:"/",
+        component : HomeComponent,
+        title:"Questionnaires"
+    },
+    
     {
         path:"/register",
         component : RegisterComponent,

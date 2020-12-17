@@ -1,13 +1,11 @@
 import React from 'react';
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import RegisterUI from '../../layout/Register';
+import useForm from './useForm';
 
 function RegisterComponent() {
     return (
-        <div>
-            <h1>Register</h1>
-            <Link to="/login">Login</Link>
-        </div>
+        <RegisterUI form={useForm()} />
     )
 }
 

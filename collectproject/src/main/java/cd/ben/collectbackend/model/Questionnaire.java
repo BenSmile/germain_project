@@ -25,13 +25,19 @@ public class Questionnaire {
     private String code;
     @NotBlank(message = "Description is required")
     private String description;
-    @NotNull(message = "Date is required")
+//    @NotNull(message = "Date is required")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionnaire")
     private List<Question> questions = new ArrayList<>();
+
+    @PrePersist
+    protected void onCreate(){
+        this.creationDate = new Date();
+    }
+
 
     public Long getId() {
         return id;
@@ -74,6 +80,7 @@ public class Questionnaire {
         this.code = code;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd")
     public Date getCreationDate() {
         return creationDate;
     }
