@@ -8,9 +8,9 @@ import useForm from './useForm';
 
 function CreateQuestionniareComponent() {
 
-    useEffect(() => {
-        addQuestionnaire();
-    }, [])
+    // useEffect(() => {
+    //     addQuestionnaire();
+    // }, [])
     return (
         <div>
       

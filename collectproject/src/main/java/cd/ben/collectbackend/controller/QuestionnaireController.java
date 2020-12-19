@@ -35,9 +35,17 @@ public class QuestionnaireController {
     //    this method work for update and create task
     @PostMapping("/")
     public ResponseEntity<?> addQuestionnaire(@Valid @RequestBody Questionnaire questionnaire, BindingResult result) {
+        System.out.println("questionnaire = " + questionnaire.getCode());
+
+        Questionnaire questionnaireServiceByCode = questionnaireService.findByCode(questionnaire.getCode());
+
+        if (questionnaireServiceByCode != null) {
+            result.addError(new FieldError("Questionnaire", "CodeDuplicated", "Code already used"));
+        }
 
         if (result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
+
             for (FieldError error : result.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
@@ -86,7 +94,7 @@ public class QuestionnaireController {
             return new ResponseEntity<String>("Questionnaire not found", HttpStatus.BAD_REQUEST);
         }
         Questionnaire byId = questionnaireService.findById(id);
-        Iterable<Question> questions= questionnaireService.findAllQuestions(byId);
+        Iterable<Question> questions = questionnaireService.findAllQuestions(byId);
 
 //        List<Question> questions = byId.getQuestions();
         return new ResponseEntity(questions, HttpStatus.OK);

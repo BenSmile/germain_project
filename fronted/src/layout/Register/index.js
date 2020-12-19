@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { Button, Checkbox, Form, Grid, Header as SemanticHeader, Segment } from 'semantic-ui-react'
 import Header from '../../components/Header'
 
@@ -6,7 +7,7 @@ const RegisterUI = ({ form: { onChange, form, validateForm } }) => (
 
     <Grid centered>
         <Grid.Column style={{ maxWidth: 550, marginTop: "20px" }}>
-            <SemanticHeader>Sign up</SemanticHeader>
+            <SemanticHeader>Creer un compte</SemanticHeader>
             <Segment>
                 <Form>
                     <Form.Field>
@@ -26,6 +27,8 @@ const RegisterUI = ({ form: { onChange, form, validateForm } }) => (
                     </Form.Field>
 
                     <Button type='submit' disabled={validateForm} fluid primary>Submit</Button>
+
+                    <Segment>Vous avez deja un compte? <Link to="/login">Connectez-vous</Link></Segment>
                 </Form>
 
             </Segment>

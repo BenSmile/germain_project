@@ -6,11 +6,11 @@ import { Menu, Image, Button, Icon } from "semantic-ui-react"
 
 const Header = () => {
 
-    const pathname = window.location.pathname;
+    // const pathname = window.location.pathname;
 
 
-    console.log("path  register= ", (pathname.includes('register') || (pathname.includes('login'))))
-    { !(pathname.includes('register') || (pathname.includes('login'))) && <Header /> }
+    // console.log("path  register= ", (pathname.includes('register') || (pathname.includes('login'))))
+    // { !(pathname.includes('register') || (pathname.includes('login'))) && <Header /> }
 
 
     return (
