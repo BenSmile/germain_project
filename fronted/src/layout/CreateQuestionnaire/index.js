@@ -18,16 +18,7 @@ const CreateQuestionnaireUI = ({ form: { onChange, form, validateForm, onSubmit 
                     <Form.Field>
                         <Form.TextArea value={form.description || ""} onChange={onChange} name="description" placeholder='Description' label="Description" />
                     </Form.Field>
-{/* 
-                    <Form.Field>
-                        <Form.Input value={form.lastname || ""} onChange={onChange} name="lastname" placeholder='Last Name' label="Last Name" />
-                    </Form.Field> */}
-                    {/* <Form.Field>
-                        <Form.Input value={form.email || ""} onChange={onChange} name="email" type='email' placeholder='Email' label="Email" />
-                    </Form.Field>
-                    <Form.Field>
-                        <Form.Input value={form.password || ""} onChange={onChange} name="password" type="password" placeholder='Password' label="Password" />
-                    </Form.Field> */}
+
 
                     <Button type='submit' onClick={onSubmit} disabled={validateForm} fluid primary>Submit</Button>
                 </Form>

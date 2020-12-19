@@ -1,12 +1,14 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-
+import LoginUI from '../../layout/Login';
+import useForm from './useForm';
 
 function LoginComponent() {
     return (
         <div>
-            <h1>Login</h1>
-            <Link to="/register">Login</Link>
+          
+          <LoginUI form={useForm()}/>
+           
 
         </div>
     )
