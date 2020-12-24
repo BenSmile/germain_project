@@ -40,7 +40,7 @@ public class QuestionnaireController {
         Questionnaire questionnaireServiceByCode = questionnaireService.findByCode(questionnaire.getCode());
 
         if (questionnaireServiceByCode != null) {
-            result.addError(new FieldError("Questionnaire", "CodeDuplicated", "Code already used"));
+            result.addError(new FieldError("Questionnaire", "code", "Code already used"));
         }
 
         if (result.hasErrors()) {
