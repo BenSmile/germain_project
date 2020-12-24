@@ -2,16 +2,12 @@ package cd.ben.collectbackend.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "questionnaire")
+@Table(name = "user")
 public class User {
 
     @Id
@@ -25,13 +21,18 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @NotBlank(message = "Password is required")
+    private String password;
+
     @NotBlank(message = "First name is required")
-    @Column(unique = true)
     private String firstName;
 
     @NotBlank(message = "Last name is required")
-    @Column(unique = true)
     private String lastName;
+
+    @Column(name="role")
+    @Enumerated(EnumType.STRING)
+    private UserRole role;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
@@ -88,5 +89,26 @@ public class User {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setStatus(UserRole role) {
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
