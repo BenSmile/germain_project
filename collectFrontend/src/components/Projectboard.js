@@ -15,6 +15,8 @@ class Projectboard extends Component {
      componentWillUpdate(){
         this.props.getBacklog();
      }
+
+     
     render() {
 
         const { project_tasks } = this.props.project_tasks;
