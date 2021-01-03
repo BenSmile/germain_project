@@ -1,5 +1,5 @@
 package cd.ben.collectbackend.model;
 
-public enum UserRole {
+public enum RoleName {
     ADMIN, ENQUETEUR
 }
