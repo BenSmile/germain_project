@@ -3,13 +3,24 @@ import { Button, Card, Image, Icon } from 'semantic-ui-react';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
-import { getAllQuestionnaires } from '../../actions/questionnaireActions';
+import { getAllQuestionnaires, handleUpdateQuestionaireModal } from '../../actions/questionnaireActions';
+
+import UpdateQuestionnaire from './UpdateQuestionnaire';
 
 
 
 class ListQuestionnaire extends Component {
 
 
+    constructor(props) {
+        super(props)
+
+        this.state = {
+
+        }
+        this.handleModal = this.handleModal.bind(this);
+
+    }
 
 
 
@@ -17,9 +28,17 @@ class ListQuestionnaire extends Component {
         this.props.getAllQuestionnaires();
     }
 
-    // componentWillUpdate() {
-    //     this.props.getAllQuestionnaires();
-    // }
+    handleModal(questionnaire) {
+        // e.preventDefault();
+        console.log('questionnaire', questionnaire)
+        let data = {
+            open: true,
+            data: questionnaire
+        };
+        // this.props.handleUpdateQuestionaireModal(data);
+
+    }
+
 
     render() {
 
@@ -30,40 +49,7 @@ class ListQuestionnaire extends Component {
         //     console.log('res', res)
         // })
 
-        const DisplayQuestionnaires = list => {
-
-            list.map(questionnaire => {
-
-                return (
-                    <Card fluid>
-                        <Card.Content>
-
-                            <Card.Header>
-                                {questionnaire.titre}
-                                <div style={{ float: "right" }}>
-
-                                    <Button as={Link} to="/createQuestionnaire" basic icon color='blue'>
-                                        <Icon name="add"></Icon>
-                                    </Button>
-
-                                    <Button circular size='mini' as={Link} to="/createQuestionnaire" basic icon color='blue'>
-                                        <Icon name="eye"></Icon>
-                                    </Button>
-                                    <Button circular size='mini' as={Link} to="/createQuestionnaire" basic icon color='blue'>
-                                        <Icon name="edit"></Icon>
-                                    </Button>
-                                </div>
-                            </Card.Header>
-                            <Card.Meta>Friends of Elliot</Card.Meta>
-                            <Card.Description>
-                                Steve wants to add you to the group <strong>best friends</strong>
-                            </Card.Description>
-                        </Card.Content>
-                    </Card>
-
-                )
-            })
-        }
+        
 
         // console.log('allQuestionnaires :>> ', this.props);
 
@@ -100,7 +86,7 @@ class ListQuestionnaire extends Component {
                                             <Button circular size='mini' as={Link} to={`/questionnaire/${questionnaire.id}`} basic icon color='blue'>
                                                 <Icon name="eye"></Icon>
                                             </Button>
-                                            <Button circular size='mini' as={Link} to="/createQuestionnaire" basic icon color='blue'>
+                                            <Button circular size='mini'  as={Link} to={`/updateQuestionnaire/${questionnaire.id}`}  basic icon color='blue'>
                                                 <Icon name="edit"></Icon>
                                             </Button>
                                         </div>
@@ -123,6 +109,7 @@ class ListQuestionnaire extends Component {
 
 ListQuestionnaire.propTypes = {
     getAllQuestionnaires: PropTypes.func.isRequired,
+    handleUpdateQuestionaireModal: PropTypes.func.isRequired,
     allQuestionnaires: PropTypes.object.isRequired
 }
 
@@ -130,4 +117,4 @@ const mapStateToProps = state => ({
     allQuestionnaires: state.questionnaire
 })
 
-export default connect(mapStateToProps, { getAllQuestionnaires })(ListQuestionnaire);
+export default connect(mapStateToProps, { getAllQuestionnaires, handleUpdateQuestionaireModal })(ListQuestionnaire);

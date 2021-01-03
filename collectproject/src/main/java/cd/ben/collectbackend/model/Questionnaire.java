@@ -7,9 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Table(name = "questionnaire")
@@ -21,7 +19,7 @@ public class Questionnaire {
     @NotBlank(message = "Title is required")
     private String titre;
     @NotBlank(message = "Code is required")
-    @Column(unique = true)
+
     private String code;
     @NotBlank(message = "Description is required")
     private String description;
@@ -32,6 +30,12 @@ public class Questionnaire {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "questionnaire")
     private List<Question> questions = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "enquete_users",
+            joinColumns = @JoinColumn(name = "enquete_id", table = "questionnaire"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", table = "users"))
+    private Set<Role> enqueteurs = new HashSet<>();
 
     @PrePersist
     protected void onCreate(){
@@ -87,5 +91,14 @@ public class Questionnaire {
 
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
+    }
+
+
+    public Set<Role> getEnqueteurs() {
+        return enqueteurs;
+    }
+
+    public void setEnqueteurs(Set<Role> enqueteurs) {
+        this.enqueteurs = enqueteurs;
     }
 }

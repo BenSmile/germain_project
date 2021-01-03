@@ -1,6 +1,7 @@
 import Home from "../components/Home";
 import Login from "../components/Login";
 import AddQuestionnaire from "../components/Questionnaire/AddQuestionnaire";
+import  UpdateQuestionnaire from "../components/Questionnaire/UpdateQuestionnaire";
 import ListQuestionnaire from "../components/Questionnaire/ListQuestionnaire";
 import Questionnaire from "../components/Questionnaire/Questionnaire";
 import Register from "../components/Register";
@@ -18,6 +19,13 @@ const routes = [
         component : Questionnaire,
         title:"Questionnaire"
     },
+
+    {
+        path:"/updateQuestionnaire/:id",
+        component : UpdateQuestionnaire,
+        title:"Modifier Questionnaire"
+    },
+
     {
         path:"/",
         component : ListQuestionnaire,

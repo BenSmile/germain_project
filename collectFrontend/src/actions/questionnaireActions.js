@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-import { GET_ERRORS, GET_ALL_QUESTIONNAIRES, GET_QUESTIONNAIRE_BY_ID } from "./types";
+import { GET_ERRORS, GET_ALL_QUESTIONNAIRES, GET_QUESTIONNAIRE_BY_ID, OPEN_EDIT_QUESTIONAIRE_MODAL } from "./types";
 
 const QUESTIONNAIRE_BASE_URI = "http://127.0.0.1:8080/api/questionnaire/";
 
@@ -41,6 +41,24 @@ export const getQuestionnaireById = (questionnaireId, history) => async dispatch
         dispatch({
             type: GET_QUESTIONNAIRE_BY_ID,
             payload: res.data
+        })
+    } catch (error) {
+        console.log('error', error)
+        // history.push("/")
+    }
+}
+
+
+
+export const handleUpdateQuestionaireModal = (data) => async dispatch => {
+    console.log("DDDDDDDDDDDDD " + data)
+    try {
+        // const res = await axios.get(`${QUESTIONNAIRE_BASE_URI}\\${questionnaireId}`);
+
+        // console.log('res', res)
+        dispatch({
+            type: OPEN_EDIT_QUESTIONAIRE_MODAL,
+            payload: data
         })
     } catch (error) {
         console.log('error', error)

@@ -1,48 +1,133 @@
-import React from 'react'
-import { Button, Header, Image, Modal } from 'semantic-ui-react';
+import React, { Component } from 'react'
 
-export default function UpdateQuestionnaire() {
+import { Button, Checkbox, Form, Grid, Header as SemanticHeader, Segment, Label } from 'semantic-ui-react'
+import { addQuestionnaire, getQuestionnaireById } from '../../actions/questionnaireActions';
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+class UpdateQuestionnaire extends Component {
 
     constructor(props) {
         super(props)
-    
+
         this.state = {
-             open:false
+            id: 0,
+            titre: "",
+            code: "",
+            description: "",
+            validateForm: true,
+            errors: {}
         }
+
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
-    
-    return (
-        <Modal
-            onClose={() => this.setState({open:false})}
-            onOpen={() => this.setState({open:true})}
-         
-            open={this.state.open}
-            trigger={<Button>Show Modal</Button>}
-        >
-            <Modal.Header>Select a Photo</Modal.Header>
-            <Modal.Content image>
-                <Image size='medium' src='/images/avatar/large/rachel.png' wrapped />
-                <Modal.Description>
-                    <Header>Default Profile Image</Header>
-                    <p>
-                        We've found the following gravatar image associated with your e-mail
-                        address.
-            </p>
-                    <p>Is it okay to use this photo?</p>
-                </Modal.Description>
-            </Modal.Content>
-            <Modal.Actions>
-                <Button color='black' onClick={() => setOpen(false)}>
-                    Nope
-          </Button>
-                <Button
-                    content="Yep, that's me"
-                    labelPosition='right'
-                    icon='checkmark'
-                    onClick={() => setOpen(false)}
-                    positive
-                />
-            </Modal.Actions>
-        </Modal>
-    )
+
+    componentDidMount() {
+        const { id } = this.props.match.params;
+        this.props.getQuestionnaireById(id)
+
+
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.errors) {
+            this.setState({
+                errors: nextProps.errors
+            })
+        }
+
+
+        const { id, titre, description, code } = nextProps.questionnaire;
+        this.setState({
+            id,
+            titre,
+            code,
+            description
+        })
+    }
+
+    onChange(e) {
+        this.setState({ [e.target.name]: e.target.value })
+    }
+    onSubmit(e) {
+        e.preventDefault();
+        let newQuestionnaire = {
+            id: this.state.id,
+            titre: this.state.titre,
+            code: this.state.code,
+            description: this.state.description
+        }
+        this.props.addQuestionnaire(newQuestionnaire, this.props.history)
+    }
+
+    render() {
+
+        const { errors } = this.state;
+
+        return (
+            <Grid centered>
+                <Grid.Column style={{ maxWidth: 550, marginTop: "20px" }}>
+                    <SemanticHeader centered>CREATION D'UN QUESTIONNAIRE</SemanticHeader>
+                    <Segment>
+                        <Form>
+                            <Form.Field>
+                                <Form.Input value={this.state.titre || ""} className={errors.titre && 'error'} onChange={this.onChange} name="titre" placeholder='Titre' label="Titre" />
+                                {
+                                    errors.titre && (
+                                        <Label basic color='red' pointing>
+                                            {errors.titre}
+                                        </Label>)
+                                }
+                            </Form.Field>
+
+                            <Form.Field>
+                                <Form.Input value={this.state.code || ""} className={errors.code && 'error'} onChange={this.onChange} name="code" placeholder='Code' label="Code" />
+                                {
+                                    errors.code && (<Label basic color='red' pointing>
+                                        {errors.code}
+                                    </Label>)
+                                }
+                            </Form.Field>
+                            <Form.Field>
+                                <Form.TextArea value={this.state.description || ""} className={errors.description && 'error'} onChange={this.onChange} name="description" placeholder='Description' label="Description" />
+                                {
+                                    errors.description && (
+                                        <Label basic color='red' pointing>
+                                            {errors.description}
+                                        </Label>
+                                    )
+                                }
+                            </Form.Field>
+
+
+                            <Button type='submit' onClick={this.onSubmit} fluid primary>Submit</Button>
+                        </Form>
+
+                    </Segment>
+
+                </Grid.Column>
+            </Grid>
+        )
+    }
 }
+
+
+
+UpdateQuestionnaire.propTypes = {
+    addQuestionnaire: PropTypes.func.isRequired,
+    getQuestionnaireById: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired,
+    questionnaire: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+    errors: state.errors,
+    questionnaire: state.questionnaire.questionnaire
+})
+
+export default connect(mapStateToProps, { addQuestionnaire, getQuestionnaireById })(UpdateQuestionnaire);
+
+
+
+
