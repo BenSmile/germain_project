@@ -21,7 +21,10 @@ public class QuestionnaireService {
 
         System.out.println("questionnaire = " + questionnaire.getId());
 
-        questionnaire.setCode(questionnaire.getCode().toUpperCase());
+        if(questionnaire.getId()== null){
+            questionnaire.setCode(questionnaire.getCode().toUpperCase());
+        }
+
 //        if(findById(questionnaire.getId()))
         return questionnaireRepository.save(questionnaire);
     }

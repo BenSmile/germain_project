@@ -1,5 +1,5 @@
 package cd.ben.collectbackend.model;
 
 public enum TypeQuestion {
-    TEXT, RADIO
+    TEXT, ONE_CHOICE, MULTI_CHOICE
 }
