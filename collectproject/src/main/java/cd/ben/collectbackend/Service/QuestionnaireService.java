@@ -3,10 +3,16 @@ package cd.ben.collectbackend.Service;
 
 import cd.ben.collectbackend.Repository.QuestionRepository;
 import cd.ben.collectbackend.Repository.QuestionnaireRepository;
+import cd.ben.collectbackend.Repository.UserRepository;
 import cd.ben.collectbackend.model.Question;
 import cd.ben.collectbackend.model.Questionnaire;
+import cd.ben.collectbackend.model.Role;
+import cd.ben.collectbackend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class QuestionnaireService {
@@ -16,6 +22,10 @@ public class QuestionnaireService {
 
     @Autowired
     private QuestionRepository questionRepository;
+
+
+    @Autowired
+    private UserRepository userRepository;
 
     public Questionnaire saveOrUpdate(Questionnaire questionnaire) {
 
@@ -54,4 +64,18 @@ public class QuestionnaireService {
     }
 
 
+    public void assignUserToQuestionnaire(Long questionnaireId, Long userId) {
+        Questionnaire questionnaire = findById(questionnaireId);
+        Set<User> enqueteurs = questionnaire.getEnqueteurs();
+        System.out.println("enqueteurs = " + enqueteurs.size());
+        enqueteurs.add(userRepository.findUserById(userId));
+        questionnaireRepository.save(questionnaire);
+    }
+
+    public Iterable<User> getAllEnqueteurs(Long questionnaireId){
+//        Iterable<User> allUsersByQuestionnaire = questionnaireRepository.findAllUsersByQuestionnaire(questionnaireId);
+        Questionnaire questionnaire = findById(questionnaireId);
+        return questionnaire.getEnqueteurs();
+//        return allUsersByQuestionnaire;
+    }
 }
