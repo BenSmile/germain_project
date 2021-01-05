@@ -16,6 +16,10 @@ public interface QuestionnaireRepository extends CrudRepository<Questionnaire, L
 
     Questionnaire findQuestionnaireByCode(String code);
 
-    @Query(value = "select *  from users where id in (select user_id from enquete_users where enquete_id = ?1)", nativeQuery = true)
+
+
+    @Query(value = "select o.enqueteurs from Questionnaire o where o.id = :id")
+//    @Query(value = "select u from User u where u")
+//    @Query(value = "select id  from users where id in (select user_id from enquete_users where enquete_id = ?1)", nativeQuery = true)
     Iterable<User> findAllUsersByQuestionnaire(Long id);
 }

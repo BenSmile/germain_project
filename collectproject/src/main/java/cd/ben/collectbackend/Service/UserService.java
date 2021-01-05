@@ -1,6 +1,7 @@
 package cd.ben.collectbackend.Service;
 
 
+import cd.ben.collectbackend.Repository.QuestionnaireRepository;
 import cd.ben.collectbackend.Repository.UserRepository;
 import cd.ben.collectbackend.model.Questionnaire;
 import cd.ben.collectbackend.model.Role;
@@ -9,16 +10,18 @@ import cd.ben.collectbackend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private QuestionnaireRepository questionnaireRepository;
 
 
     public Iterable<User> allUsers() {
@@ -73,8 +76,17 @@ public class UserService {
         return userRepository.findUserById(userId);
     }
 
-    public Iterable<Questionnaire> getAllQuestionnaires(Long userId){
-        Iterable<Questionnaire> allQuestionnaireByUser = userRepository.findAllQuestionnaireByUser(userId);
-        return allQuestionnaireByUser;
+    public Iterable<Questionnaire> getAllQuestionnaires(Long userId) {
+
+        User u = findById(userId);
+        List<Questionnaire> all = (List<Questionnaire>) questionnaireRepository.findAll();
+
+        List<Questionnaire> collect = all
+                .stream()
+                .filter(questionnaire -> questionnaire.getEnqueteurs().contains(u)).collect(Collectors.toList());
+
+        System.out.println("collect = " + collect.size());
+//        Iterable<Questionnaire> allQuestionnaireByUser = userRepository.findAllQuestionnaireByUser(userId);
+        return collect;
     }
 }

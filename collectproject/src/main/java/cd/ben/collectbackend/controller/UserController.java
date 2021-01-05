@@ -134,10 +134,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}/enquetes")
-    public ResponseEntity getAllQuestionnaire(@PathVariable Long id, BindingResult result) {
+    public ResponseEntity getAllQuestionnaire(@PathVariable Long id) {
+        System.out.println("id = " + id);
         User user = userService.findById(id);
         if (user == null) {
-            result.addError(new FieldError("User", "user", "User not found"));
+            return new ResponseEntity<String>("User not found", HttpStatus.BAD_REQUEST);
+//            result.addError(new FieldError("User", "user", "User not found"));
         }
         Iterable<Questionnaire> allQuestionnaires = userService.getAllQuestionnaires(id);
         return new ResponseEntity(allQuestionnaires, HttpStatus.OK);

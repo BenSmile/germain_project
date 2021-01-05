@@ -73,9 +73,9 @@ public class QuestionnaireService {
     }
 
     public Iterable<User> getAllEnqueteurs(Long questionnaireId){
-//        Iterable<User> allUsersByQuestionnaire = questionnaireRepository.findAllUsersByQuestionnaire(questionnaireId);
-        Questionnaire questionnaire = findById(questionnaireId);
-        return questionnaire.getEnqueteurs();
-//        return allUsersByQuestionnaire;
+        Iterable<User> allUsersByQuestionnaire = questionnaireRepository.findAllUsersByQuestionnaire(questionnaireId);
+//        Questionnaire questionnaire = findById(questionnaireId);
+//        return questionnaire.getEnqueteurs();
+        return allUsersByQuestionnaire;
     }
 }

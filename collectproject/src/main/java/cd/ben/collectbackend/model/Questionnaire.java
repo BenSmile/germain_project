@@ -92,8 +92,7 @@ public class Questionnaire {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
-
+    @JsonIgnore
     public Set<User> getEnqueteurs() {
         return enqueteurs;
     }
