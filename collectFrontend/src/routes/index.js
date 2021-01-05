@@ -5,6 +5,7 @@ import  UpdateQuestionnaire from "../components/Questionnaire/UpdateQuestionnair
 import ListQuestionnaire from "../components/Questionnaire/ListQuestionnaire";
 import Questionnaire from "../components/Questionnaire/Questionnaire";
 import Register from "../components/Register";
+import AddQuestion from "../components/Question/AddQuestion";
 
 
 
@@ -19,6 +20,13 @@ const routes = [
         component : Questionnaire,
         title:"Questionnaire"
     },
+
+    {
+        path:"/questionnaire/:id/ajouterQuestion",
+        component : AddQuestion,
+        title:"Questionnaire"
+    },
+
 
     {
         path:"/updateQuestionnaire/:id",

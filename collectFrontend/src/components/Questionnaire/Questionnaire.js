@@ -8,8 +8,6 @@ import { Link, useLocation } from "react-router-dom";
 import { getQuestionnaireById } from '../../actions/questionnaireActions';
 
 
-
-
 class Questionnaire extends Component {
 
 
@@ -28,7 +26,7 @@ class Questionnaire extends Component {
         return (
             <div className="container">
             <SemanticHeader>Questionnaire : {questionnaire.titre}</SemanticHeader>
-               <TabExampleSecondaryPointing/>
+               <TabExampleSecondaryPointing questionnaireId = {questionnaire.id}/>
             </div>
         )
     }

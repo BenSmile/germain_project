@@ -68,7 +68,7 @@ class UpdateQuestionnaire extends Component {
         return (
             <Grid centered>
                 <Grid.Column style={{ maxWidth: 550, marginTop: "20px" }}>
-                    <SemanticHeader centered>CREATION D'UN QUESTIONNAIRE</SemanticHeader>
+                    <SemanticHeader centered>MISE A JOUR D'UN QUESTIONNAIRE</SemanticHeader>
                     <Segment>
                         <Form>
                             <Form.Field>
