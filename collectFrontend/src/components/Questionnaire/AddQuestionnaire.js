@@ -45,6 +45,8 @@ class AddQuestionnaire extends Component {
 
         const { errors } = this.state;
         return (
+
+            
             <Grid centered>
                 <Grid.Column style={{ maxWidth: 550, marginTop: "20px" }}>
                     <SemanticHeader centered>CREATION D'UN QUESTIONNAIRE</SemanticHeader>
@@ -87,7 +89,9 @@ class AddQuestionnaire extends Component {
 
                 </Grid.Column>
             </Grid>
-        )
+     
+     
+     )
     }
 }
 

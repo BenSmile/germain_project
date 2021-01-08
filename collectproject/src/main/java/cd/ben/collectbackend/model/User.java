@@ -4,8 +4,10 @@ package cd.ben.collectbackend.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -39,11 +41,22 @@ public class User {
     @NotBlank(message = "Last name is required")
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @NotNull(message = "Role cannot be null")
+    @Enumerated(EnumType.STRING)
+    private RoleName role;
+
+//    @ManyToMany(fetch = FetchType.LAZY)
+//    @JoinTable(name = "user_roles",
+//            joinColumns = @JoinColumn(name = "user_id"),
+//            inverseJoinColumns = @JoinColumn(name = "role_id"))
+//    private Set<Role> roles = new HashSet<>();
+
+
+//    @ElementCollection(targetClass = RoleName.class, fetch = FetchType.EAGER)
+//    @Enumerated(EnumType.STRING)
+//    @CollectionTable(name = "user_roles", joinColumns = { @JoinColumn(name = "user_id") })
+//    @Column(name = "user_role")
+//    private List<RoleName> roles;
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date creationDate;
@@ -102,12 +115,19 @@ public class User {
         this.creationDate = creationDate;
     }
 
-
-    public Set<Role> getRoles() {
-        return roles;
+    public String getPassword() {
+        return password;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public RoleName getRole() {
+        return role;
+    }
+
+    public void setRole(RoleName role) {
+        this.role = role;
     }
 }

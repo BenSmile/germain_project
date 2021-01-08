@@ -35,7 +35,7 @@ public class Questionnaire {
     @JoinTable(name = "enquete_users",
             joinColumns = @JoinColumn(name = "enquete_id", table = "questionnaire"),
             inverseJoinColumns = @JoinColumn(name = "user_id", table = "users"))
-    private Set<Role> enqueteurs = new HashSet<>();
+    private Set<User> enqueteurs = new HashSet<>();
 
     @PrePersist
     protected void onCreate(){
@@ -92,13 +92,12 @@ public class Questionnaire {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
-
-    public Set<Role> getEnqueteurs() {
+    @JsonIgnore
+    public Set<User> getEnqueteurs() {
         return enqueteurs;
     }
 
-    public void setEnqueteurs(Set<Role> enqueteurs) {
+    public void setEnqueteurs(Set<User> enqueteurs) {
         this.enqueteurs = enqueteurs;
     }
 }
