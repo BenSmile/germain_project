@@ -73,7 +73,7 @@ export default function Question(props) {
         if (question.type == "text") {
             return (
                 <div className="form-group" onChange={onChange}>
-                    <label htmlFor="exampleInputEmail1">{question.titre}</label>
+                    <label htmlFor="exampleInputEmail1">{`${question.id}. ${question.titre}`}</label>
                     <input type="email" className="form-control" id="exampleInputEmail1" placeholder={question.titre} />
                 </div>
             )
@@ -84,7 +84,7 @@ export default function Question(props) {
             console.log("options =========== ", answer_array)
             return (
                 <div className="form-group">
-                    <label>{question.titre}</label>
+                    <label>{`${question.id}. ${question.titre}`}</label>
                     <div className="form-group">
                         {DisplayOptions(answer_array, type)}
                     </div>
@@ -94,7 +94,7 @@ export default function Question(props) {
             let type = "checkbox"
             return (
                 <div className="form-group">
-                    <label htmlFor="exampleInputEmail1">{question.titre}</label>
+                    <label htmlFor="exampleInputEmail1">{`${question.id}. ${question.titre}`}</label>
                     {DisplayOptions(answer_array, type)}
                 </div>
 

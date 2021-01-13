@@ -11,7 +11,6 @@ import UpdateQuestionnaire from './UpdateQuestionnaire';
 
 class ListQuestionnaire extends Component {
 
-
     constructor(props) {
         super(props)
 
@@ -21,8 +20,6 @@ class ListQuestionnaire extends Component {
         this.handleModal = this.handleModal.bind(this);
 
     }
-
-
 
     componentDidMount() {
         this.props.getAllQuestionnaires();
@@ -44,7 +41,7 @@ class ListQuestionnaire extends Component {
 
         const { allQuestionnaires } = this.props.allQuestionnaires;
 
-        console.log('allQuestionnaires', this.props)
+        // console.log('allQuestionnaires', this.props)
         // this.props.getAllQuestionnaires().then( (res) => {
         //     console.log('res', res)
         // })
@@ -54,7 +51,7 @@ class ListQuestionnaire extends Component {
         // console.log('allQuestionnaires :>> ', this.props);
 
         return (
-            <div className="container">
+            <div className="container" style={{marginTop: "30px" }}>
 
                 <div className="container">
                     <div className="row">
@@ -91,9 +88,10 @@ class ListQuestionnaire extends Component {
                                             </Button>
                                         </div>
                                     </Card.Header>
-                                    <Card.Meta>Friends of Elliot</Card.Meta>
+                                    <Card.Meta>Date de Créatoon : {questionnaire.creationDate}</Card.Meta>
+                                    <Card.Meta>Nombre d'enqueteurs : 8</Card.Meta>
                                     <Card.Description>
-                                        Steve wants to add you to the group <strong>best friends</strong>
+                                        {questionnaire.description}
                                     </Card.Description>
                                 </Card.Content>
                             </Card>

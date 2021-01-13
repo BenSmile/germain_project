@@ -19,3 +19,14 @@ export const OPEN_EDIT_QUESTIONAIRE_MODAL = "OPEN_EDIT_QUESTIONAIRE_MODAL";
 // related to Question
 export const GET_ALL_QUESTIONS = "GET_ALL_QUESTIONS";
 export const GET_QUESTION_BY_ID = "GET_QUESTION_BY_ID";
+
+
+// related to Question
+export const LOGIN = "LOGIN";
+
+// related to Question
+export const GET_USER = "GET_USER";
+export const GET_ALL_USERS = "GET_ALL_USERS";
+export const LOGOUT_USER = "LOGOUT_USER";
+
+
