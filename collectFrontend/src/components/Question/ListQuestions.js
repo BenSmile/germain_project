@@ -15,7 +15,7 @@ export default function ListQuestions() {
     const [questions, setQuestions] = useState([])
 
     // print params to console
-    console.log("param = ", params);
+    // console.log("param = ", params);
     const { id } = params;
 
 
@@ -41,10 +41,7 @@ export default function ListQuestions() {
                 {
                     questions.map(question => (
                         <div>
-
-                     
                         <Question q = {question} i={question.id}/>
-                            
                         </div>
                     ))
                 }

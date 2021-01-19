@@ -63,7 +63,10 @@ export default function AddQuestion() {
     }
 
     return (
-        <Grid centered>
+
+        <div>
+        <br></br>
+            <Grid centered>
             <Grid.Column style={{ maxWidth: 550, marginTop: "20px" }}>
                 <SemanticHeader centered>AJOUT D'UNE QUESTION</SemanticHeader>
                 <Segment>
@@ -86,6 +89,8 @@ export default function AddQuestion() {
 
             </Grid.Column>
         </Grid>
+        </div>
+        
 
     )
 }

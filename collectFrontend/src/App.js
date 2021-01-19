@@ -50,6 +50,8 @@ function App() {
       <Router>
         <Header />
         <br></br>
+        <br></br>
+        <br></br>
         <Switch>
           {routes
             .map((route, index) =>

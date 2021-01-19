@@ -1,10 +1,10 @@
-import { GET_ALL_USERS, GET_USER, LOGOUT_USER } from "../actions/types";
+import { GET_ALL_USERS, GET_USER, LOGOUT_USER, GET_ALL_INVESTIGATORS } from "../actions/types";
 
 const initialState = {
     allUsers: [],
-    user: {}
+    user: {},
+    investigators: []
 };
-
 
 export default function (state = initialState, action) {
     switch (action.type) {
@@ -19,6 +19,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 allUsers: action.payload
+            };
+
+        case GET_ALL_INVESTIGATORS:
+            return {
+                ...state,
+                investigators: action.payload
             };
         case LOGOUT_USER:
             return {

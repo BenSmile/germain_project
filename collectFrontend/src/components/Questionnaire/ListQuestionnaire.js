@@ -76,9 +76,9 @@ class ListQuestionnaire extends Component {
                                         {questionnaire.titre}
                                         <div style={{ float: "right" }}>
 
-                                            <Button circular size='mini' as={Link} to="/createQuestionnaire" basic icon color='blue'>
+                                            {/* <Button circular size='mini' as={Link} to="/createQuestionnaire" basic icon color='blue'>
                                                 <Icon name="add"></Icon>
-                                            </Button>
+                                            </Button> */}
 
                                             <Button circular size='mini' as={Link} to={`/questionnaire/${questionnaire.id}`} basic icon color='blue'>
                                                 <Icon name="eye"></Icon>

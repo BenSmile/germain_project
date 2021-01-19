@@ -9,6 +9,7 @@ import AddQuestion from "../components/Question/AddQuestion";
 import Profil from "../components/User/Profil";
 import ListUser from "../components/User/ListUser";
 import HomepageLayout from "../components/HomepageLayout";
+import ListInvestigators from "../components/User/ListInvestigators";
 
 
 
@@ -53,6 +54,13 @@ const routes = [
         path: "/",
         component: HomepageLayout,
         title: "Accueil"
+    },
+
+    {
+        requireAuth: true,
+        path: "/assign_investigators/:id",
+        component: ListInvestigators,
+        title: "Enqueteurs"
     },
 
     {
